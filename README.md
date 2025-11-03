@@ -1,24 +1,32 @@
-# Advanced_Algorithms
+# Advanced_Algorithms_Tips
 
-## Dataset
-Provide dataset source or synthetic generation details here.
+This repo demonstrates a pure-Python pipeline (**no notebooks**) for a restaurant tips dataset.
 
-## Environment Setup
+## Data
+- `data/tip.csv` — raw dataset (place yours here; a copy is included if you provided one).
+- `data/restaurant_tips_cleaned_scaled.csv` — processed output (written by the pipeline).
+
+## Setup
 ```bash
 python -m venv .venv
-# Activate virtual environment
-# Windows: .\.venv\Scripts\Activate.ps1
-# macOS/Linux: source .venv/bin/activate
+# Windows:
+.\.venv\Scripts\Activate.ps1
+# macOS/Linux:
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## How to Run
+## Run
 ```bash
+python src/main.py --data data/tip.csv --save data/restaurant_tips_cleaned_scaled.csv
+# or simply:
 python src/main.py
 ```
 
-## Steps Summary
-1. **EDA:** Initial data exploration and summary.
-2. **Cleaning:** Handle missing values, outliers, and data inconsistencies.
-3. **Feature Engineering:** Create new features for better modeling.
-4. **Scaling:** Normalize or standardize numerical features.
+## What it does
+- **EDA**: prints head/info/describe
+- **Cleaning**: drops empty rows, fills numeric NA (median), trims outliers with robust IQR
+- **Feature engineering**: adds `tip_rate = tip / total_bill` if those columns exist; one-hot encodes common categoricals `sex/smoker/day/time`
+- **Scaling**: standardizes numeric columns
+
+Adjust modules in `src/` to match your final assignment decisions and document them here.
